@@ -38,7 +38,7 @@ class TaskController extends Controller
             'completed' => false,
         ]);
 
-        return redirect()->route('tasks.index');
+        return redirect()->route('tasks.index')->with('success', 'Tarea creada correctamente.');
     }
 
     /**
@@ -46,40 +46,47 @@ class TaskController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $task = Task::findOrFail($id);
+        return view('tasks.show', compact('task'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Task $task)
+    public function edit(string $id)
     {
+        $task = Task::findOrFail($id);
         return view('tasks.edit', compact('task'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Task $task)
+    public function update(Request $request, string $id)
     {
         $request->validate([
             'title' => 'required',
+            'completed' => 'boolean',
         ]);
 
+        $task = Task::findOrFail($id);
         $task->update([
             'title' => $request->title,
             'completed' => $request->completed ?? false,
         ]);
 
-        return redirect()->route('tasks.index');
+        return redirect()->route('tasks.index')->with('success', 'Tarea actualizada correctamente.');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Task $task)
+    public function destroy(string $id)
     {
+
+        $task = Task::findOrFail($id);
         $task->delete();
-        return redirect()->route('tasks.index');
+
+        return redirect()->route('tasks.index')->with('success', 'Tarea eliminada correctamente.');
     }
 }
