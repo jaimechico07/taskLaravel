@@ -2,19 +2,27 @@
 
 ## Instalación
 
-1. Clonar el repositorio:
-  git clone (url de repositorio)
-
+1. Clona el repositorio:
+    ```bash
+    git clone https://github.com/jaimechico07/taskLaravel.git
+    ```
 2. Navegar al directorio del proyecto:
-   cd gestion-tareas
+    ```bash
+    cd gestion-tareas
+    ```
+4. Instala las dependencias:
+    ```bash
+    composer install
+    ```
 
-3. Instalar las dependencias:
-   composer install
+5. Configura el archivo `.env` con tus credenciales de base de datos.
 
-4. Configurar la base de datos en el archivo .env.
+6. Ejecuta las migraciones:
+    ```bash
+    php artisan migrate
+    ```
 
-5. Ejecutar las migraciones:
-   php artisan migrate
-
-6. Servir el proyecto:
-   php artisan serve
+7. Inicia el servidor de desarrollo:
+    ```bash
+    php artisan serve
+    ```
